@@ -1,7 +1,7 @@
 # Setup
 
-Install minikube as recommended.
-Install istioctl as shown in getting started guide.
+Install minikube as recommended using brew. [&rarr; guide](https://minikube.sigs.k8s.io/docs/start/)
+Install istioctl as shown in getting started guide _without brew_. [&rarr; guide](https://istio.io/latest/docs/setup/getting-started/)
 
 1. `minikube start`
 2. `eval \$(minikube docker-env)`
