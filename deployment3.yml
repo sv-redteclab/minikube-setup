@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-feature-b
+spec:
+  selector:
+    matchLabels:
+      app: service
+      version: feature-b
+  template:
+    metadata:
+      labels:
+        app: service
+        version: feature-b
+    spec:
+      containers:
+        - name: server
+          image: server
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 300Mi
+              cpu: 300m
+            limits:
+              memory: 800Mi
+              cpu: 1200m
+          readinessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:3000/health
+            periodSeconds: 5
+            failureThreshold: 5
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:3000/health
+            periodSeconds: 5
+            failureThreshold: 10
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: NAME
+              value: 'service-feature-b'
